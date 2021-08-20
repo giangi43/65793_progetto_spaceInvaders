@@ -389,26 +389,26 @@ void *proiettileSX(void* voidPersonaggio){
             break;
         }
 
+        //controllo contatti con alieni cattivi e agisco di conseguenza
+        index = checkContacts(personaggio,alienoCattivo,NUMERO_ALIENI*NUMERO_ALIENI_CATTIVI);
+        
+        //controllo contatti  con alieni e agisco di conseguenza
+        index = checkContacts(personaggio,alieno,NUMERO_ALIENI);
+        if(0<=index){
+            if (alieno[index].vite<=0){
+                controlloAlieno(&alieno[index], alienoCattivo);
+            }
+        }
+        
         // controllo se è dentro il campo di gioco
         if (isOutOfBound(personaggio)){
             killIt(personaggio);
             break;
-        }else{
-
-            //controllo contatti con alieni cattivi e agisco di conseguenza
-            index = checkContacts(personaggio,alienoCattivo,NUMERO_ALIENI*NUMERO_ALIENI_CATTIVI);
-            
-            //controllo contatti  con alieni e agisco di conseguenza
-            index = checkContacts(personaggio,alieno,NUMERO_ALIENI);
-            if(0<=index){
-                if (alieno[index].vite<=0){
-                    controlloAlieno(&alieno[index], alienoCattivo);
-                }
-            }
-            
-            //stampo
-            printPropietaOggetto(personaggio,personaggio->vite,apparenzaProiettile);
         }
+
+        //stampo
+        printPropietaOggetto(personaggio,personaggio->vite,apparenzaProiettile);
+        
     }
 }
 
@@ -458,28 +458,29 @@ void *proiettileDX(void* voidPersonaggio){
             killIt(personaggio);
             break;
         }
+        
 
+        //controllo contatti con alieni cattivi e agisco di conseguenza
+        index = checkContacts(personaggio,alienoCattivo,NUMERO_ALIENI*NUMERO_ALIENI_CATTIVI);
+        
+        //controllo contatti  con alieni e agisco di conseguenza
+        index = checkContacts(personaggio,alieno,NUMERO_ALIENI);
+        if(0<=index){
+            if (alieno[index].vite<=0){
+                controlloAlieno(&alieno[index], alienoCattivo);
+            }
+        }
+        
 
         // controllo se è dentro il campo di gioco
        if (isOutOfBound(personaggio)){
             killIt(personaggio);
             break;
-        }else{
-
-            //controllo contatti con alieni cattivi e agisco di conseguenza
-            index = checkContacts(personaggio,alienoCattivo,NUMERO_ALIENI*NUMERO_ALIENI_CATTIVI);
-            
-            //controllo contatti  con alieni e agisco di conseguenza
-            index = checkContacts(personaggio,alieno,NUMERO_ALIENI);
-            if(0<=index){
-                if (alieno[index].vite<=0){
-                    controlloAlieno(&alieno[index], alienoCattivo);
-                }
-            }
-            
-            //stampo
-            printPropietaOggetto(personaggio,personaggio->vite,apparenzaProiettile);
         }
+
+        //stampo
+        printPropietaOggetto(personaggio,personaggio->vite,apparenzaProiettile);
+        
     }
 }
 
