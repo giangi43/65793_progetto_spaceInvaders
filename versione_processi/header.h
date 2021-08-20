@@ -100,13 +100,6 @@ int aliveProcesses; // contatore processi atttivi
 
 //main
 void controllo (int fileDescriptor[]); //controlla stampe, interazioni e legge da pipe
-void alienoF(int pipeout, struct proprietaOggetto *personaggio); // crea un alieno
-void naveSpazialeF(int pipeout, struct proprietaOggetto *personaggio); // crea una nave spaziale
-void spara(struct proprietaOggetto proiettile[], struct proprietaOggetto *valore_letto, int fileDescriptor[],int istanzaProiettile); // crea 2 proiettili (SX e DX)
-void proiettileSX(int pipeout, struct proprietaOggetto *personaggio); // crea un proiettile SX
-void proiettileDX(int pipeout, struct proprietaOggetto *personaggio); // crea un proiettile DX
-void dropBombF(int pipeout,struct proprietaOggetto *personaggio); // crea una drop bomb
-int checkContacts(struct proprietaOggetto *personaggioA, struct proprietaOggetto arrayPersonaggiB[], int numeroPersonaggiB); // verifica i contatti tra un array e un entità e aggiorna gli interessati in caso di contatto
 void controlloNave(int *viteTotali); // stampa il numero di vite di una nave con la grafica
 void controlloAlieno(int fileDescriptor[], struct proprietaOggetto *alieno, struct proprietaOggetto alienoCattivo[]); // gestisce il comportamento di un alieno di primo livello in caso di morte
 
@@ -119,6 +112,8 @@ void freeTheBuffer(int pipein,struct proprietaOggetto valore_letto); // ripulisc
 void killThemAll(struct proprietaOggetto personaggio[], int numeroPersonaggi); // elimina un intero array di personaggi
 void killIt(struct proprietaOggetto *personaggio); // elimina un personaggio
 void creaGruppoPersonaggi(struct proprietaOggetto personaggio[], int *fileDescriptor, void (*figlio) (int, struct proprietaOggetto *p), int numeroPersonaggi); // crea un insieme di personaggi
+int checkContacts(struct proprietaOggetto *personaggioA, struct proprietaOggetto arrayPersonaggiB[], int numeroPersonaggiB); // verifica i contatti tra un array e un entità e aggiorna gli interessati in caso di contatto
+
 
 // disegno
 void setActualFieldSize(); // imposta le dimensioni iniziali dello schermo
@@ -152,6 +147,12 @@ char passo(struct proprietaOggetto *personaggio, char c); // aggiorna l' entità
 void updateProprietaOggetto(struct proprietaOggetto *daSovrascrivere, struct proprietaOggetto *daCopiare ); // aggiorna l' entità
 void proiettileF (int pipeout, struct proprietaOggetto *proprieta_proiettile, char (*spostamento)(struct proprietaOggetto*)); // controlla un entità tipo proiettile o bomba
 void waitTOJumpIn(struct proprietaOggetto *proprieta_personaggio); // attende un tot di tempo prima di far entrare in gioco un alieno 
+void alienoF(int pipeout, struct proprietaOggetto *personaggio); // crea un alieno
+void naveSpazialeF(int pipeout, struct proprietaOggetto *personaggio); // crea una nave spaziale
+void proiettileSX(int pipeout, struct proprietaOggetto *personaggio); // crea un proiettile SX
+void proiettileDX(int pipeout, struct proprietaOggetto *personaggio); // crea un proiettile DX
+void dropBombF(int pipeout,struct proprietaOggetto *personaggio); // crea una drop bomb
+void spara(struct proprietaOggetto proiettile[], struct proprietaOggetto *valore_letto, int fileDescriptor[],int istanzaProiettile); // crea 2 proiettili (SX e DX) 
     //comportamenti
     char spostamentoAPassi (struct proprietaOggetto *personaggio, bool isRandom); // gestisce lo spostamento di un personaggio 
     char spostamentoLineare (struct proprietaOggetto *personaggio, bool isRandom); // gestisce lo spostamento di un alieno
@@ -161,7 +162,6 @@ void waitTOJumpIn(struct proprietaOggetto *proprieta_personaggio); // attende un
     char spostamentoDropBomb (struct proprietaOggetto *proiettile);
 
 // custom e debug
-//void printStringDebugLog(bool isDebugging, char* string, void *something);
 void printStringIntDebugLog(bool isDebugging, char* string, int *something); // stampa una stringa ed un intero su log
 void printStringCharDebugLog(bool isDebugging, char* string,char *something); // stampa una stringa ed un carattere su log
 void printStringStringDebugLog(bool isDebugging, char* string,char something[]); // stampa 2 stringhe su log

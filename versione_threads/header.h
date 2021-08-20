@@ -121,86 +121,79 @@ int istanzaDropBomb; //posizione dell array di bombe da cui partire con la creaz
 
 
 //main
-void controllo ();
-void *alienoF(void* voidComm);
-void *naveSpazialeF(void* voidComm);
-void spara(struct proprietaOggetto proiettile[], struct proprietaOggetto *valore_letto);
-void *proiettileSX(void* voidComm);
-void *proiettileDX(void* voidComm);
-void *dropBombF(void* voidComm);
-int checkContacts(struct proprietaOggetto *personaggioA, struct proprietaOggetto arrayPersonaggiB[], int numeroPersonaggiB);
-void controlloNave(int *viteTotali);
-void controlloAlieno(struct proprietaOggetto *alieno, struct proprietaOggetto alienoCattivo[]);
-int push(struct proprietaOggetto coda[],struct proprietaOggetto *oggetto);
-struct proprietaOggetto pop(struct proprietaOggetto coda[]);
+void controllo (); //controlla stampe, interazioni e legge da pipe
+void controlloAlieno(struct proprietaOggetto *alieno, struct proprietaOggetto alienoCattivo[]); // gestisce il comportamento di un alieno di primo livello in caso di morte
+int push(struct proprietaOggetto coda[],struct proprietaOggetto *oggetto); // scrive dentro la coda circolare
+struct proprietaOggetto pop(struct proprietaOggetto coda[]); // legge da coda circolare
 
 
 // controllo processi
-void pipeCeck(int *p); //controlla che la pipe sia stata eseguita correttamente
-//void mutexCeck(pthread_mutex_t *m);
-void mutexLock(pthread_mutex_t *m, char nomeMutex[]);
-void mutexUnlock(pthread_mutex_t *m, char nomeMutex[]);
-void scrivi (struct proprietaOggetto *personaggio);
-void leggi ( struct proprietaOggetto *valore_letto);
-pid_t myForkSwitch(struct proprietaOggetto *personaggio, int *fileDescriptor, void* (*figlio) (void*));
-pthread_t myThreadCreate(struct proprietaOggetto *personaggio, void* (*figlio) (void*));
+void mutexLock(pthread_mutex_t *m, char nomeMutex[]); // blocca una mutex
+void mutexUnlock(pthread_mutex_t *m, char nomeMutex[]); // sblocca una mutex
+void scrivi (struct proprietaOggetto *personaggio); // scrive su buffer circolare
+void leggi ( struct proprietaOggetto *valore_letto); // legge da buffer circolare
+pthread_t myThreadCreate(struct proprietaOggetto *personaggio, void* (*figlio) (void*)); // crea un thread
 void freeTheBuffer(int pipein,struct proprietaOggetto valore_letto); // ripulisce tutto il buffer
-void killThemAll(struct proprietaOggetto personaggio[], int numeroPersonaggi);
-void killIt(struct proprietaOggetto *personaggio);
-void creaGruppoPersonaggi(struct proprietaOggetto personaggio[], void* (*figlio) (void*), int numeroPersonaggi);
+void killThemAll(struct proprietaOggetto personaggio[], int numeroPersonaggi);// elimina un intero array di personaggi
+void killIt(struct proprietaOggetto *personaggio);// elimina un personaggio
+void creaGruppoPersonaggi(struct proprietaOggetto personaggio[], void* (*figlio) (void*), int numeroPersonaggi); // crea un insieme di personaggi
+int checkContacts(struct proprietaOggetto *personaggioA, struct proprietaOggetto arrayPersonaggiB[], int numeroPersonaggiB); // verifica i contatti tra un array e un entità e aggiorna gli interessati in caso di contatto
+
 
 // disegno
-void setActualFieldSize();
-int getXfieldSize();
-int getYfieldSize();
+void setActualFieldSize(); // imposta le dimensioni iniziali dello schermo
+int getXfieldSize(); // restituisce la dimensione delle x dello schermo
+int getYfieldSize(); // restituisce la dimensione delle y dello schermo
 void buildFieldBorders(int x, int y); // disegna il campo da gioco partendo da 0,0
 void buildFieldBordersFromTo(int startingX, int startingY, int endingX, int endingY); // disegna il campo da gioco partendo
 void gameOver(int x, int y); //animazione del game over
 void youWon(int x, int y); // animazione vittoria
 void resetField(int startingX, int stratingY, int endingX, int endingY); // iposta l'area come vuota
-//void printPropietaOggetto(struct proprietaOggetto *oggetto);
-void printPropietaOggetto(struct proprietaOggetto *oggetto, int vite, void (*apparenze)(int));
-void deletePropietaOggetto(struct proprietaOggetto *oggetto);
-void printFPS(int startingX, int startingY, int *FPScounter);
-void printEnemiesLeft(int startingX, int startingY, int numeroNemici);
-int customMenu(char nomeMenu[], char voceMenu[][25], int *interazioni[], int numeroVoci);
-void printNAliveProcesses(int startingX, int startingY, int *nProcesses);
-void apparenzaAlieno(int vite);
-void apparenzaAlienoCattivo(int vite);
-void apparenzaNaveSpaziale(int vite);
-void apparenzaProiettile(int vite);
-void apparenzaDropBomb(int vite);
+void printPropietaOggetto(struct proprietaOggetto *oggetto, int vite, void (*apparenze)(int)); // stampa un entità sullo schermo con le sue apparenze
+void deletePropietaOggetto(struct proprietaOggetto *oggetto); // cancella un entità dallo schermo
+void printFPS(int startingX, int startingY, int *FPScounter); // stampa gli fps dello schermo
+void printEnemiesLeft(int startingX, int startingY, int numeroNemici); // stampa il numero di nemici rimasti
+int customMenu(char nomeMenu[], char voceMenu[][25], int *interazioni[], int numeroVoci);// crea e stampa il menu interattivo
+void printNAliveProcesses(int startingX, int startingY, int *nProcesses); // stampa il numero di processi in vita
+void printLifesLeft(int startingX, int startingY, int lifesLeft); //stampa il numero di vite rimaste
+void apparenzaAlieno(int vite); // apparenze estetiche dell alieno di primo livello
+void apparenzaAlienoCattivo(int vite); // apparenze estetiche dell alieno di secondo livello
+void apparenzaNaveSpaziale(int vite); // apparenze estetiche della nave
+void apparenzaProiettile(int vite); // apparenze estetiche delli proiettili
+void apparenzaDropBomb(int vite); // apparenze estetiche delle bombe
 
 // entita gioco
 void setPersonaggio (struct proprietaOggetto *proprieta_personaggio, char characterPlaceHolder[], int startingX, int startingY, pid_t pidToAssign, int viteIniziali, int istanza); // imposta i valori iniziali del personaggio
-void copyPersonaggio (struct proprietaOggetto *copiante,struct proprietaOggetto *copiato);
-void inizializzaPersonaggi(struct proprietaOggetto *daCopiare, struct proprietaOggetto Personaggio[], int numeroPersonaggi);
-//void personaggioF (struct proprietaOggetto *pos_personaggio, int isAutonomus, char (*spostamento)(struct proprietaOggetto*,bool)); // gestisce il personaggio
+void copyPersonaggio (struct proprietaOggetto *copiante,struct proprietaOggetto *copiato); // copia un entità all interno dell altra
+void inizializzaPersonaggi(struct proprietaOggetto *daCopiare, struct proprietaOggetto Personaggio[], int numeroPersonaggi); // copia un entità all interno di un array di entità
 void createRandomLocation(struct proprietaOggetto *el); //assegna ad una struttura proprietaOggetto una posizione casuale
 bool isSameLocation(struct proprietaOggetto *elA, struct proprietaOggetto *elB); // valuta se 2 strutture proprietaOggetto hanno la stessa posizione
-bool isSameLocationArray(struct proprietaOggetto *elA, struct proprietaOggetto elB[], int arrayLenght);
-int indexOfWhoIsSameLocationArray(struct proprietaOggetto *elA, struct proprietaOggetto elB[], int arrayLenght);
-bool isOutOfBound(struct proprietaOggetto *elA);
-char passo(struct proprietaOggetto *personaggio, char c);
-void printLifesLeft(int startingX, int startingY, int lifesLeft);
-void updateProprietaOggetto(struct proprietaOggetto *daSovrascrivere, struct proprietaOggetto *daCopiare );
-void proiettileF (struct proprietaOggetto *proprieta_proiettile, char (*spostamento)(struct proprietaOggetto*));
-void waitTOJumpIn(struct proprietaOggetto *proprieta_personaggio);
+bool isSameLocationArray(struct proprietaOggetto *elA, struct proprietaOggetto elB[], int arrayLenght); // valuta se una struttura ed un array hanno la stessa posizione
+int indexOfWhoIsSameLocationArray(struct proprietaOggetto *elA, struct proprietaOggetto elB[], int arrayLenght); // valuta se una struttura ed un array hanno la stessa posizione e restituisce la posizione dell array del primo match
+bool isOutOfBound(struct proprietaOggetto *elA); // verificha se un entità si trova all esterno dell area di gioco
+char passo(struct proprietaOggetto *personaggio, char c); // aggiorna l' entità cambiandone la sua posizione
+void updateProprietaOggetto(struct proprietaOggetto *daSovrascrivere, struct proprietaOggetto *daCopiare ); // aggiorna l' entità
+void waitTOJumpIn(struct proprietaOggetto *proprieta_personaggio); // attende un tot di tempo prima di far entrare in gioco un alieno
+void *alienoF(void* voidComm); // crea un alieno e lo gestisce completamente
+void *naveSpazialeF(void* voidComm); // crea una nave spaziale e la gestisce completamente
+void spara(struct proprietaOggetto proiettile[], struct proprietaOggetto *valore_letto); // inizializza e chiama due proiettili in caso di sparo
+void *proiettileSX(void* voidComm); // crea un proiettile sinistro e lo gestisce completamente
+void *proiettileDX(void* voidComm); // crea un proiettile destro e lo gestisce completamente
+void *dropBombF(void* voidComm); // crea una bomba e la gestisce completamente
     //comportamenti
     char spostamentoAPassi (struct proprietaOggetto *personaggio, bool isRandom); // gestisce lo spostamento di un personaggio 
-    char spostamentoLineare (struct proprietaOggetto *personaggio, bool isRandom);
-    char spostamentoAPassiLaterali (struct proprietaOggetto *personaggio, bool isRandom);
+    char spostamentoLineare (struct proprietaOggetto *personaggio, bool isRandom); // gestisce lo spostamento di un alieno
+    char spostamentoAPassiLaterali (struct proprietaOggetto *personaggio, bool isRandom); // gestisce lo spostamento di un personaggio su una sola riga
     char spostamentoProiettileSX (struct proprietaOggetto *proiettile);
     char spostamentoProiettileDX (struct proprietaOggetto *proiettile);
     char spostamentoDropBomb (struct proprietaOggetto *proiettile);
 
 // custom e debug
-//void printStringDebugLog(bool isDebugging, char* string, void *something);
-void printStringIntDebugLog(bool isDebugging, char* string, int *something);
-void printStringCharDebugLog(bool isDebugging, char* string,char *something);
-void printStringStringDebugLog(bool isDebugging, char* string,char something[]);
-int customRandom(int min, int max);
-void createDebugLog(bool isDebugging);
-void printDebugLog(bool isDebugging);
-void printProprietaOggettoDebugLog(bool isDebugging,struct proprietaOggetto *personaggio);
-void printMutexDebugLog(bool isDebugging, char nomeMutex[], char statoMutex[]);
+void printStringIntDebugLog(bool isDebugging, char* string, int *something); // stampa una stringa ed un intero su log
+void printStringCharDebugLog(bool isDebugging, char* string,char *something); // stampa una stringa ed un carattere su log
+void printStringStringDebugLog(bool isDebugging, char* string,char something[]); // stampa 2 stringhe su log
+int customRandom(int min, int max); // restituisce un valore random compresi gli estremi
+void createDebugLog(bool isDebugging); // crea il file di log
+void printDebugLog(bool isDebugging); // stampa l' indice di debug sul log
+void printProprietaOggettoDebugLog(bool isDebugging,struct proprietaOggetto *personaggio); // stampa un entità sul log
+void printMutexDebugLog(bool isDebugging, char nomeMutex[], char statoMutex[]); // stampa una mutex sul log
