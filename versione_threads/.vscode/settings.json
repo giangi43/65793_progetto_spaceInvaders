@@ -1,0 +1,25 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/rooter/progetto/progetto_processi",
+            "binaryPath": "/home/rooter/progetto/progetto_processi/VespaEContadino.out",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/home/rooter/progetto/progetto_processi",
+            "binaryPath": "/home/rooter/progetto/progetto_processi/SpaceInvadersP.out",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/home/rooter/progetto/progetto_threads",
+            "binaryPath": "/home/rooter/progetto/progetto_threads/SpaceInvadersP.out",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/home/rooter/progetto/65793_progetto/versione_threads",
+            "binaryPath": "/home/rooter/progetto/65793_progetto/versione_threads/spaceInvaders.out",
+            "binaryArgs": []
+        }
+    ]
+}

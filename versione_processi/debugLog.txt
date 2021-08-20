@@ -1,0 +1,17 @@
+0; 
+1; 
+entrato dentro controllo() 2;  pipeout = 4 
+entrato dentro naveSpaziale() 6; 
+nave controllata nave 0
+personaggio 7 con istanza 0: e ancora vivo
+nave controllata drop 13
+nave controllata drop 15
+personaggio 7 con istanza 0: e ancora vivo
+nave controllata drop 8
+nave controllata drop 15
+personaggio 7 con istanza 0: e ancora vivo
+ kill Them All! < 
+ kill Them All! 7 
+ kill Them All! o 
+ kill Them All! * 
+ kill Them All! > 

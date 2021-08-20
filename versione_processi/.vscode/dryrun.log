@@ -1,0 +1,10 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/rooter/progetto/65793_progetto/versione_processi'
+gcc -std=c99 -c main.c
+gcc -std=c99 -c customAndDebug.c
+gcc -std=c99 -c entitaGioco.c
+gcc -std=c99 -c disegno.c
+gcc -std=c99 -c controlloProcessi.c
+gcc main.o customAndDebug.o entitaGioco.o disegno.o controlloProcessi.o -o spaceInvaders.out -lncurses
+make: Leaving directory '/home/rooter/progetto/65793_progetto/versione_processi'
+ 
