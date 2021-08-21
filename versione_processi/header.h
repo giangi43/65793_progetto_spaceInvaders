@@ -16,7 +16,7 @@
 
 //#define printStringDebugLog(isDebugging,string,something) _Generic((isDebugging,string,something), int*: printStringIntDebugLog, char*: printStringCharDebugLog)(isDebugging,string,something);
 
-#define D_IS_AUTONOMUS true // permette al gioco di giocarsi da solo
+#define D_IS_AUTONOMUS false // permette al gioco di giocarsi da solo
 #define SEGNAPOSTO_ALIENO "<(^_^)>" // apparenza alieno primo livello
 #define SEGNAPOSTO_ALIENO_CATTIVO ">.<" // apparenza alieno secondo livello
 #define SEGNAPOSTO_NAVE "7:^)" // apparenza nave spazziale

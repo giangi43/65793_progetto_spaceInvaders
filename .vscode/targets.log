@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Aug 20 14:30:19 2021
+# Make data base, printed on Sat Aug 21 10:43:51 2021
 
 # Variables
 
@@ -55,7 +55,7 @@ PATH = /home/rooter/.vscode-server/bin/3866c3553be8b268c8a7f8c0482c0c0177aa8bfa/
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-b63fb053-a2be-4292-b635-d8bfe111f552.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-c1c091cb-2e7c-4269-9526-b035322b1ba2.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -144,8 +144,10 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=67/1024=7%, Rehash=0, Collisions=4/89=4%
+# Load=68/1024=7%, Rehash=0, Collisions=4/90=4%
 
 # Pattern-specific Variable Values
 
@@ -153,9 +155,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2, inode 17169973579610465): 5 files, no impossibilities.
+# . (device 2, inode 17169973579610465): 6 files, no impossibilities.
 
-# 5 files, no impossibilities in 1 directories.
+# 6 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -205,13 +207,13 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 13 / storage = 133 B / avg = 10 B
-# current buf: size = 8162 B / used = 133 B / count = 13 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 14 / storage = 138 B / avg = 9 B
+# current buf: size = 8162 B / used = 138 B / count = 14 / avg = 9 B
 
-# strcache performance: lookups = 16 / hit rate = 18%
+# strcache performance: lookups = 17 / hit rate = 17%
 # hash-table stats:
-# Load=13/8192=0%, Rehash=0, Collisions=1/16=6%
-# Finished Make data base on Fri Aug 20 14:30:19 2021
+# Load=14/8192=0%, Rehash=0, Collisions=1/17=6%
+# Finished Make data base on Sat Aug 21 10:43:51 2021
 
  
 make: *** No rule to make target 'all'.  Stop.
