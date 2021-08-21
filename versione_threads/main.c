@@ -21,18 +21,6 @@ int main(){
     VELOCITA_PERSONAGGI = D_VELOCITA_PERSONAGGI;
     IS_AUTONOMUS = D_IS_AUTONOMUS;
 
-    struct proprietaOggetto talieno[NUMERO_ALIENI];
-    struct proprietaOggetto talienoCattivo[NUMERO_ALIENI*NUMERO_ALIENI_CATTIVI];
-    struct proprietaOggetto tnaveSpaziale[NUMERO_GIOCATORI];
-    //struct proprietaOggetto valore_letto;
-    struct proprietaOggetto tdropBomb[NUMERO_MAX_PROIETTILI];
-    struct proprietaOggetto tproiettile[NUMERO_MAX_PROIETTILI];
-    alieno = talieno;
-    alienoCattivo = talienoCattivo;
-    naveSpaziale = tnaveSpaziale;
-    //valore_letto = &tvalore_letto;
-    dropBomb= tdropBomb;
-    proiettile=tproiettile;
 
     char mainMenu[][25]={"PLAY","OPTION","QUIT"};
     char optionMenu[][25]={ "numero alieni",
@@ -93,7 +81,7 @@ int main(){
 
             posizioneCoda=0;
             numeroElementiAttualiCoda=0;
-            
+
             attrset(A_NORMAL);
             printStringIntDebugLog(DEBUGGING_NEEDED,"-> controllo %d; \n", &debugIndex);
             controllo (NULL);
@@ -116,11 +104,22 @@ int main(){
         animazioni;
 */
 void controllo (){
-printStringIntDebugLog(DEBUGGING,"entrato dentro controllo() %d; ", &debugIndex);
+    printStringIntDebugLog(DEBUGGING,"entrato dentro controllo() %d; ", &debugIndex);
+    struct proprietaOggetto talieno[NUMERO_ALIENI];
+    struct proprietaOggetto talienoCattivo[NUMERO_ALIENI*NUMERO_ALIENI_CATTIVI];
+    struct proprietaOggetto tnaveSpaziale[NUMERO_GIOCATORI];
     struct proprietaOggetto valore_letto;
+    struct proprietaOggetto tdropBomb[NUMERO_MAX_PROIETTILI];
+    struct proprietaOggetto tproiettile[NUMERO_MAX_PROIETTILI];
+    
+    naveSpaziale = tnaveSpaziale;
+    dropBomb= tdropBomb;
+    proiettile=tproiettile;
+    alieno = talieno;
+    alienoCattivo = talienoCattivo;
+    
     istanzaProiettile=0;
     istanzaDropBomb=0;
-    int viteTotali=NUMERO_GIOCATORI*VITE_NAVE;
     numeroNemici=NUMERO_ALIENI;
     clockStart = clock();
     int FPScounter = 0;
@@ -174,12 +173,8 @@ printStringIntDebugLog(DEBUGGING,"entrato dentro controllo() %d; ", &debugIndex)
 
     do { 
         
-        napms(1);
+        napms(10);
         leggi (&valore_letto);        
-        if(valore_letto.flag!='v'){
-            printStringIntDebugLog(DEBUGGING,"inizio %d\n", &debugIndex);
-            printProprietaOggettoDebugLog(DEBUGGING, &valore_letto);
-        }
         if(valore_letto.flag==LOST){
             break;
         }        
@@ -188,12 +183,12 @@ printStringIntDebugLog(DEBUGGING,"entrato dentro controllo() %d; ", &debugIndex)
             gestisco il caso di un errore
         */ 
         else if( valore_letto.flag!='v'){
-            printStringIntDebugLog(DEBUGGING,"qualcosa è andato storto dentro a controllo %d\n",&debugIndex);
+            printStringIntDebugLog(DEBUGGING,"qualcosa è stato scritto %d\n",&debugIndex);
             printProprietaOggettoDebugLog(DEBUGGING,&valore_letto);
         }
         
         
-    } while (viteTotali >0 && valore_letto.flag!=QUIT && numeroNemici>0 && valore_letto.flag!=LOST); // ciclo fino al verificarsi di una collisione alieni/naveSpaziale //
+    } while (naveSpaziale[0].vite >0 && valore_letto.flag!=QUIT && numeroNemici>0 && valore_letto.flag!=LOST); // ciclo fino al verificarsi di una collisione alieni/naveSpaziale //
 
     killThemAll(alieno, NUMERO_ALIENI);
     killThemAll(naveSpaziale, NUMERO_GIOCATORI);

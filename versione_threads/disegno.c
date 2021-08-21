@@ -140,7 +140,7 @@ void printFPS(int startingX, int startingY, int *FPScounter){
 */
 void printNAliveProcesses(int startingX, int startingY, int *nProcesses){ 
     mutexLock(&printMutex,"stampa printNAliveProcesses");   
-    mvprintw(startingY, startingX, "processes:%d//", *nProcesses);
+    mvprintw(startingY, startingX, "threads:%d//", *nProcesses);
     refresh();
     mutexUnlock(&printMutex,"stampa printNAliveProcesses");
 }

@@ -329,9 +329,18 @@ char spostamentoDropBomb (struct proprietaOggetto *proiettile){
     controlla che i proiettili siano inattivi altrimenti li elimina e li ricrea
 */
 void spara(struct proprietaOggetto proiettile[], struct proprietaOggetto *valore_letto){
-    
+    pthread_t tidA = proiettile[istanzaProiettile].tid;
+    pthread_t tidB = proiettile[(istanzaProiettile+1)%NUMERO_MAX_PROIETTILI].tid;
+
     killIt(&proiettile[istanzaProiettile]);
     killIt(&proiettile[(istanzaProiettile+1)%NUMERO_MAX_PROIETTILI]);
+
+    if(tidA!=0){
+        pthread_join(tidA,NULL);
+    }
+    if(tidB!=0){
+        pthread_join(tidB,NULL);
+    }
 
     setPersonaggio(&proiettile[istanzaProiettile],SEGNAPOSTO_PROIETTILE,valore_letto->x+valore_letto->lunghezzaSegnaposto/2-1,valore_letto->y-1,0,1,istanzaProiettile);                    
     setPersonaggio(&proiettile[(istanzaProiettile+1)%NUMERO_MAX_PROIETTILI],SEGNAPOSTO_PROIETTILE,valore_letto->x+valore_letto->lunghezzaSegnaposto/2-1,valore_letto->y-1,0,1,(istanzaProiettile+1)%NUMERO_MAX_PROIETTILI);                    
@@ -410,6 +419,8 @@ void *proiettileSX(void* voidPersonaggio){
         printPropietaOggetto(personaggio,personaggio->vite,apparenzaProiettile);
         
     }
+    aliveProcesses--;
+    printNAliveProcesses(getXfieldSize()-15,0,&aliveProcesses);
 }
 
 /*
@@ -482,6 +493,8 @@ void *proiettileDX(void* voidPersonaggio){
         printPropietaOggetto(personaggio,personaggio->vite,apparenzaProiettile);
         
     }
+    aliveProcesses--;
+    printNAliveProcesses(getXfieldSize()-15,0,&aliveProcesses);
 }
 
 /*
@@ -548,6 +561,8 @@ void *dropBombF(void* voidPersonaggio){
         //stampo
         printPropietaOggetto(personaggio,personaggio->vite,apparenzaDropBomb);
     }
+    aliveProcesses--;
+    printNAliveProcesses(getXfieldSize()-15,0,&aliveProcesses);
 }
 
 
@@ -557,6 +572,7 @@ void *dropBombF(void* voidPersonaggio){
 void *alienoF(void* voidPersonaggio){
     int bombDrop = customRandom(10,30);
     int counter =0;
+    pthread_t tidA;
     struct proprietaOggetto* personaggio = (struct proprietaOggetto*) voidPersonaggio;
     printStringIntDebugLog(DEBUGGING_NEEDED,"-> alienoF %d; \n", &personaggio->istanza);
 
@@ -623,8 +639,11 @@ void *alienoF(void* voidPersonaggio){
            
         //controllo spari e agisco
         if (personaggio->flag==BLANK_SPACE)
-        {                   
+        {   tidA = dropBomb[istanzaDropBomb].tid;                  
             killIt(&dropBomb[istanzaDropBomb]);
+            if(tidA!=0){
+                pthread_join(tidA,NULL);
+            }
             setPersonaggio(&dropBomb[istanzaDropBomb],SEGNAPOSTO_DROPBOMB,personaggio->x,personaggio->y+1,0,1,istanzaDropBomb);                    
             myThreadCreate(&(dropBomb[istanzaDropBomb]),dropBombF);
             istanzaDropBomb = (istanzaDropBomb+1)%NUMERO_MAX_PROIETTILI;
@@ -639,6 +658,8 @@ void *alienoF(void* voidPersonaggio){
     }
     numeroNemici--;
     printEnemiesLeft(10, 0, numeroNemici);
+    aliveProcesses--;
+    printNAliveProcesses(getXfieldSize()-15,0,&aliveProcesses);
 }
 
 
@@ -708,4 +729,6 @@ void *naveSpazialeF(void* voidPersonaggio){
             break;
         }
     }
+    aliveProcesses--;
+    printNAliveProcesses(getXfieldSize()-15,0,&aliveProcesses);
 }

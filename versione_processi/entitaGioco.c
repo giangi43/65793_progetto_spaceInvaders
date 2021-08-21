@@ -85,10 +85,10 @@ void personaggioF (int pipeout, struct proprietaOggetto *proprieta_personaggio, 
         if(proprieta_personaggio->y>=getYfieldSize()-2||proprieta_personaggio->y<=0){
            printStringIntDebugLog(DEBUGGING," !!!!!!!!\nERRORE il personaggio con istanza  = %d  si e eliminato da solo\n!!!!!!!!!\n", &proprieta_personaggio->istanza);
            printPropietaOggetto(proprieta_personaggio);
-           printf("errore %s:%d; uscito in autonomia",proprieta_personaggio->segnaposto,proprieta_personaggio->istanza);
            fflush(NULL);
-           exit(1);
+           proprieta_personaggio->flag=LOST;
         }
+
         write(pipeout,proprieta_personaggio,sizeof(*proprieta_personaggio));
     }
 }
@@ -357,7 +357,6 @@ void proiettileF (int pipeout, struct proprietaOggetto *proprieta_proiettile, ch
        if(proprieta_proiettile->y>=getYfieldSize()||proprieta_proiettile->y<0){
             printStringCharDebugLog(DEBUGGING," !!!!!!!!\nERRORE il proiettile %c", &proprieta_proiettile->segnaposto[0]);
             printStringIntDebugLog(DEBUGGING," con istanza  = %d  si e eliminato da solo\n!!!!!!!!!\n", &proprieta_proiettile->istanza);
-            printf("errore %s:%d; uscito in autonomia",proprieta_proiettile->segnaposto,proprieta_proiettile->istanza);
            fflush(NULL);
            exit(1);
         }

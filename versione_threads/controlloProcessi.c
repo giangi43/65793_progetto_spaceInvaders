@@ -71,7 +71,7 @@ pthread_t myThreadCreate(struct proprietaOggetto* personaggio, void* (*figlio) (
 
     pthread_create(&personaggio->tid,NULL,figlio,personaggio);
     aliveProcesses++;
-    // printNAliveProcesses(getXfieldSize()-15,0,&aliveProcesses);
+    printNAliveProcesses(getXfieldSize()-15,0,&aliveProcesses);
     // printStringIntDebugLog(DEBUGGING, "%d, tread creato\n",&personaggio->istanza);
     // fflush(NULL);
     return personaggio->tid;
@@ -140,10 +140,8 @@ void killIt(struct proprietaOggetto *personaggio){
         personaggio->tid = 0;  
         deletePropietaOggetto(personaggio);
         mutexUnlock(&printMutex,"cancello perche morto");
-        scrivi(personaggio); 
-        aliveProcesses--;
-    } 
-    printNAliveProcesses(getXfieldSize()-15,0,&aliveProcesses); 
+        scrivi(personaggio);         
+    }  
 }
 
 

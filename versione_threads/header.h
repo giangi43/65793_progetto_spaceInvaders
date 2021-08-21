@@ -66,8 +66,6 @@ struct proprietaOggetto{
     int y;
     int oldX;
     int oldY;
-//    pid_t pid;
-    pthread_mutex_t mutex;
     pthread_t tid;         
     char flag;
     bool isAlive;    
